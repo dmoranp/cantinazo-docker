@@ -1,0 +1,18 @@
+version: '3'
+services:    
+    account-wildfly:
+        image: jboss/wildfly
+        container_name: account-wildfly
+        ports:
+            - "8181:8080"
+            - "8443:8443"
+            - "9990:9990"
+        environment:
+            - DRIVER_POSGRESQL_NAME=$DRIVER_POSGRESQL_NAME
+            - DATASOURCE_NAME=$DATASOURCE_NAME
+            - DATASOURCE_JNDI=$DATASOURCE_JNDI
+            - DB_HOST=$DB_HOST
+            - DB_PORT=$DB_PORT
+            - DB_USER=$DB_USER
+            - DB_PASS=$DB_PASS
+            - DB_NAME=$DB_NAME
