@@ -2,8 +2,8 @@ FROM jboss/base-jdk:8
 LABEL maintainer="dmoran@armada.mil.ec"
 
 # Set the WILDFLY_VERSION env variable
-ENV WILDFLY_VERSION 19.1.0.Final
-ENV WILDFLY_SHA1 6883125745a62b598659ea351f5b1706aff53955
+ENV WILDFLY_VERSION 20.0.1.Final
+ENV WILDFLY_SHA1 95366b4a0c8f2e6e74e3e4000a98371046c83eeb
 ENV JBOSS_HOME /opt/jboss/wildfly
 
 USER root
@@ -48,6 +48,7 @@ EXPOSE 8080
 
 # Add script to execute
 ADD execute.sh $JBOSS_HOME/bin
+ADD standalone.conf $JBOSS_HOME/bin
 
 USER root
 RUN chown jboss:jboss $JBOSS_HOME/bin/execute.sh

@@ -1,12 +1,12 @@
 version: '3'
 services:    
-    account-wildfly:
-        image: jboss/wildfly
-        container_name: account-wildfly
+    cantinazo-app:
+        image: jboss/wildfly-cantinazo
+        container_name: cantinazo-app
         ports:
             - "8181:8080"
-            - "8443:8443"
-            - "9990:9990"
+            - "8444:8443"
+            - "9991:9990"
         environment:
             - DRIVER_POSGRESQL_NAME=$DRIVER_POSGRESQL_NAME
             - DATASOURCE_NAME=$DATASOURCE_NAME
