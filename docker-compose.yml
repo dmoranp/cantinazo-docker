@@ -1,13 +1,30 @@
-version: '3'
-services:    
+version: '3.8'
+services:
+    cantinazo-db:
+        image: postgres:12-alpine
+        container_name: cantinazo-db
+        restart: unless-stopped
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./init-database:/docker-entrypoint-initdb.d/
+        environment:
+            - POSTGRES_USER=$DB_USER
+            - POSTGRES_PASSWORD=$DB_PASS
+            - DB_NAME=$DB_NAME
+        networks:
+            - backend
+
     cantinazo-app:
         image: jboss/wildfly-cantinazo
         container_name: cantinazo-app
         restart: unless-stopped
+        depends_on:
+            - cantinazo-db
         ports:
-            - "8181:8080"
-            - "8444:8443"
-            - "9991:9990"
+            - "8080:8080"
+            - "8443:8443"
+            - "9990:9990"
         environment:
             - DRIVER_POSGRESQL_NAME=$DRIVER_POSGRESQL_NAME
             - DATASOURCE_NAME=$DATASOURCE_NAME
@@ -17,3 +34,11 @@ services:
             - DB_USER=$DB_USER
             - DB_PASS=$DB_PASS
             - DB_NAME=$DB_NAME
+        networks:
+            - frontend
+            - backend
+
+networks:
+    frontend:
+    backend:
+
