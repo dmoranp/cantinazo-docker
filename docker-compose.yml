@@ -3,6 +3,7 @@ services:
     cantinazo-app:
         image: jboss/wildfly-cantinazo
         container_name: cantinazo-app
+        restart: unless-stopped
         ports:
             - "8181:8080"
             - "8444:8443"
